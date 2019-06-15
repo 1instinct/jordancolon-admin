@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
   # This line mounts Spree's routes at the root of your application.
   # This means, any requests to URLs such as /products, will go to
   # Spree::ProductsController.
@@ -14,6 +15,11 @@ Rails.application.routes.draw do
       get 'swagger_ui'
     end
   end
+=======
+
+  mount Spree::Core::Engine, at: '/'
+  
+>>>>>>> c48cd6b (delete unnecessary comment and fix merge)
 end
 
 Spree::Core::Engine.add_routes do
@@ -43,6 +49,7 @@ Spree::Core::Engine.add_routes do
       end
     end
     resources :contacts
+    
   end
   namespace :api, constraints: { format: 'json' } do
     namespace :v1 do
