@@ -7,9 +7,11 @@
 
  *= require_self
  *= require_tree .
+ *= require spree/backend/spree_themes
 */
 
-/* admin messages css */
+/* admin messages css  *= require spree/backend/spree_themes
+*/
 .admin-msgs-gridcontainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -25,7 +27,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    /* align-items: center; */
+    /* align-items: center;  *= require spree/backend/spree_themes
+*/
 }
 
 .admin-msgs-searchinput {
@@ -51,25 +54,29 @@
     height: 50px;
     border-radius: 50%;
     background: pink;
-    /* margin-top: 10%; */
+    /* margin-top: 10%;  *= require spree/backend/spree_themes
+*/
 }
 
 .admin-msgs-conversation-label {
     margin-left: 10%;
 }
 
-/* convolist */
+/* convolist  *= require spree/backend/spree_themes
+*/
 .admin-convolist-tbody {
     display: block;
     overflow-y: scroll;
     max-height: 60vh;
     background: linear-gradient(#FAFAFA, white)
-    /* border: 1px solid black; */
+    /* border: 1px solid black;  *= require spree/backend/spree_themes
+*/
 }
 
 /* .admin-convolist-wrapper {
     overflow-y: scroll;
-} */
+}  *= require spree/backend/spree_themes
+*/
 
 #th-avatar {
     width: 15vw;
@@ -97,8 +104,10 @@
     width: 100%;
 }
 
-/* thread-list */
-/* threads */
+/* thread-list  *= require spree/backend/spree_themes
+*/
+/* threads  *= require spree/backend/spree_themes
+*/
 .admin-thread-header {
     display: flex;
     justify-content: space-around;
@@ -124,10 +133,12 @@
     overflow-y: scroll;
     overflow-x: hidden;
     height: 60vh;
-    /* margin: 8% 0 0 0; */
+    /* margin: 8% 0 0 0;  *= require spree/backend/spree_themes
+*/
 }
 
-/* messages */
+/* messages  *= require spree/backend/spree_themes
+*/
 
 p.message {
     margin: 10px !important;
@@ -209,7 +220,8 @@ p.message span text {
 /* .admin-thread-userinput-wrapper {
     border-radius: 5px;
     border: 1px solid grey;
-} */
+}  *= require spree/backend/spree_themes
+*/
 
 .admin-thread-userinput {
     margin-top: 35px;
@@ -232,5 +244,6 @@ p.message span text {
 .admin-thread-userinput:focus {
     outline-width: 0;
     /* display: grid;
-    grid-template-columns: .8fr .2fr */
+    grid-template-columns: .8fr .2fr  *= require spree/backend/spree_themes
+*/
 }
