@@ -50,21 +50,6 @@ ActiveRecord::Schema.define(version: 2020_10_23_054239) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.boolean "active", default: true
-    t.string "status", default: "unread"
-    t.text "body"
-    t.string "sender_id"
-    t.string "sender_type"
-    t.string "receiver_id"
-    t.string "receiver_type"
-    t.string "channel_id"
-    t.string "message_id"
-    t.string "conversation_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "spree_addresses", id: :serial, force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
@@ -1105,6 +1090,29 @@ ActiveRecord::Schema.define(version: 2020_10_23_054239) do
     t.index ["position"], name: "index_spree_taxons_on_position"
     t.index ["rgt"], name: "index_spree_taxons_on_rgt"
     t.index ["taxonomy_id"], name: "index_taxons_on_taxonomy_id"
+  end
+
+  create_table "spree_themes", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.string "state"
+    t.string "template_file_file_name"
+    t.string "template_file_content_type"
+    t.bigint "template_file_file_size"
+    t.datetime "template_file_updated_at"
+  end
+
+  create_table "spree_themes_templates", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.text "body"
+    t.string "path"
+    t.string "format"
+    t.string "locale"
+    t.string "handler"
+    t.boolean "partial", default: false
+    t.integer "theme_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["theme_id"], name: "index_spree_themes_templates_on_theme_id"
   end
 
   create_table "spree_trackers", id: :serial, force: :cascade do |t|

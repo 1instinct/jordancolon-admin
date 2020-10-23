@@ -47,6 +47,9 @@ gem 'spree_gateway', '~> 3.4'
 gem 'spree_static_content', github: 'spree-contrib/spree_static_content'
 gem 'spree_promo_users_codes', github: 'vinsol-spree-contrib/spree_promo_users_codes', branch: 'master'
 gem 'spree_digital', github: 'spree-contrib/spree_digital'
+gem 'import_products', :git => 'git://github.com/joshmcarthur/spree-import-products.git'
+
+gem 'sprockets-helpers', '~> 1.2.1'
 
 gem 'rest-client'
 

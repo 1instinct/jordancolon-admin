@@ -29,8 +29,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+<<<<<<< HEAD
     /* align-items: center;  *= require spree/backend/spree_promo_users_codes
  *= require spree/backend/spree_digital
+=======
+    /* align-items: center;  *= require spree/backend/spree_themes
+>>>>>>> 7a11d6ec2d580917d0c49bb4782654f35571fed1
 */
 }
 
@@ -57,8 +61,12 @@
     height: 50px;
     border-radius: 50%;
     background: pink;
+<<<<<<< HEAD
     /* margin-top: 10%;  *= require spree/backend/spree_promo_users_codes
  *= require spree/backend/spree_digital
+=======
+    /* margin-top: 10%;  *= require spree/backend/spree_themes
+>>>>>>> 7a11d6ec2d580917d0c49bb4782654f35571fed1
 */
 }
 
@@ -66,23 +74,35 @@
     margin-left: 10%;
 }
 
+<<<<<<< HEAD
 /* convolist  *= require spree/backend/spree_promo_users_codes
  *= require spree/backend/spree_digital
+=======
+/* convolist  *= require spree/backend/spree_themes
+>>>>>>> 7a11d6ec2d580917d0c49bb4782654f35571fed1
 */
 .admin-convolist-tbody {
     display: block;
     overflow-y: scroll;
     max-height: 60vh;
     background: linear-gradient(#FAFAFA, white)
+<<<<<<< HEAD
     /* border: 1px solid black;  *= require spree/backend/spree_promo_users_codes
  *= require spree/backend/spree_digital
+=======
+    /* border: 1px solid black;  *= require spree/backend/spree_themes
+>>>>>>> 7a11d6ec2d580917d0c49bb4782654f35571fed1
 */
 }
 
 /* .admin-convolist-wrapper {
     overflow-y: scroll;
+<<<<<<< HEAD
 }  *= require spree/backend/spree_promo_users_codes
  *= require spree/backend/spree_digital
+=======
+}  *= require spree/backend/spree_themes
+>>>>>>> 7a11d6ec2d580917d0c49bb4782654f35571fed1
 */
 
 #th-avatar {
@@ -111,11 +131,17 @@
     width: 100%;
 }
 
+<<<<<<< HEAD
 /* thread-list  *= require spree/backend/spree_promo_users_codes
  *= require spree/backend/spree_digital
 */
 /* threads  *= require spree/backend/spree_promo_users_codes
  *= require spree/backend/spree_digital
+=======
+/* thread-list  *= require spree/backend/spree_themes
+*/
+/* threads  *= require spree/backend/spree_themes
+>>>>>>> 7a11d6ec2d580917d0c49bb4782654f35571fed1
 */
 .admin-thread-header {
     display: flex;
@@ -142,6 +168,7 @@
     overflow-y: scroll;
     overflow-x: hidden;
     height: 60vh;
+<<<<<<< HEAD
     /* margin: 8% 0 0 0;  *= require spree/backend/spree_promo_users_codes
  *= require spree/backend/spree_digital
 */
@@ -149,6 +176,13 @@
 
 /* messages  *= require spree/backend/spree_promo_users_codes
  *= require spree/backend/spree_digital
+=======
+    /* margin: 8% 0 0 0;  *= require spree/backend/spree_themes
+*/
+}
+
+/* messages  *= require spree/backend/spree_themes
+>>>>>>> 7a11d6ec2d580917d0c49bb4782654f35571fed1
 */
 
 p.message {
@@ -231,8 +265,12 @@ p.message span text {
 /* .admin-thread-userinput-wrapper {
     border-radius: 5px;
     border: 1px solid grey;
+<<<<<<< HEAD
 }  *= require spree/backend/spree_promo_users_codes
  *= require spree/backend/spree_digital
+=======
+}  *= require spree/backend/spree_themes
+>>>>>>> 7a11d6ec2d580917d0c49bb4782654f35571fed1
 */
 
 .admin-thread-userinput {
@@ -256,7 +294,11 @@ p.message span text {
 .admin-thread-userinput:focus {
     outline-width: 0;
     /* display: grid;
+<<<<<<< HEAD
     grid-template-columns: .8fr .2fr  *= require spree/backend/spree_promo_users_codes
  *= require spree/backend/spree_digital
+=======
+    grid-template-columns: .8fr .2fr  *= require spree/backend/spree_themes
+>>>>>>> 7a11d6ec2d580917d0c49bb4782654f35571fed1
 */
 }
