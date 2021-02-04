@@ -33,20 +33,33 @@ If you need to reset your local DB:
 
 Other things we may need to cover:
 
-* Ruby version
+- Ruby version
 
-* System dependencies
+- System dependencies
 
-* Configuration
+- Configuration
 
-* Database creation
+- Database creation
 
-* Database initialization
+- Database initialization
 
-* How to run the test suite
+- How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+- Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+- Deployment instructions
 
-* ...
+- ...
+
+DOCKER SETUP
+
+`docker-compose build`
+`docker-compose up`
+
+`docker-compose run web rake db:create db:migrate`
+
+create admin user
+`docker-compose run web rake spree_auth:admin:create`
+
+all regular ruby commands work preceeded with:
+`docker-compose run web [you command here]`
