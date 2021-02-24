@@ -26,12 +26,14 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'rack-cors'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+# Handle CORs request errors
+gem 'rack-cors', :require => 'rack/cors'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -42,6 +44,10 @@ gem 'spree', '~> 3.7'
 gem 'spree_auth_devise', '~> 3.5'
 gem 'spree_gateway', '~> 3.4'
 gem 'spree_static_content', github: 'spree-contrib/spree_static_content'
+gem 'spree_promo_users_codes', github: 'vinsol-spree-contrib/spree_promo_users_codes', branch: 'master'
+gem 'spree_digital', github: 'spree-contrib/spree_digital'
+
+gem 'sprockets-helpers', '~> 1.2.1'
 
 gem 'rest-client'
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_10_194432) do
+ActiveRecord::Schema.define(version: 2020_10_23_054239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -166,6 +166,28 @@ ActiveRecord::Schema.define(version: 2019_07_10_194432) do
     t.index ["stock_location_id"], name: "index_spree_customer_returns_on_stock_location_id"
   end
 
+  create_table "spree_digital_links", id: :serial, force: :cascade do |t|
+    t.integer "digital_id"
+    t.integer "line_item_id"
+    t.string "secret"
+    t.integer "access_counter"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["digital_id"], name: "index_spree_digital_links_on_digital_id"
+    t.index ["line_item_id"], name: "index_spree_digital_links_on_line_item_id"
+    t.index ["secret"], name: "index_spree_digital_links_on_secret"
+  end
+
+  create_table "spree_digitals", id: :serial, force: :cascade do |t|
+    t.integer "variant_id"
+    t.string "attachment_file_name"
+    t.string "attachment_content_type"
+    t.integer "attachment_file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["variant_id"], name: "index_spree_digitals_on_variant_id"
+  end
+
   create_table "spree_gateways", id: :serial, force: :cascade do |t|
     t.string "type"
     t.string "name"
@@ -312,6 +334,7 @@ ActiveRecord::Schema.define(version: 2019_07_10_194432) do
   create_table "spree_order_promotions", id: :serial, force: :cascade do |t|
     t.integer "order_id"
     t.integer "promotion_id"
+    t.string "code"
     t.index ["order_id"], name: "index_spree_order_promotions_on_order_id"
     t.index ["promotion_id", "order_id"], name: "index_spree_order_promotions_on_promotion_id_and_order_id"
     t.index ["promotion_id"], name: "index_spree_order_promotions_on_promotion_id"
@@ -548,6 +571,16 @@ ActiveRecord::Schema.define(version: 2019_07_10_194432) do
     t.string "code"
   end
 
+  create_table "spree_promotion_codes", id: :serial, force: :cascade do |t|
+    t.integer "promotion_id"
+    t.string "code"
+    t.integer "user_id"
+    t.boolean "used", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["promotion_id"], name: "index_spree_promotion_codes_on_promotion_id"
+  end
+
   create_table "spree_promotion_rule_taxons", id: :serial, force: :cascade do |t|
     t.integer "taxon_id"
     t.integer "promotion_rule_id"
@@ -590,6 +623,7 @@ ActiveRecord::Schema.define(version: 2019_07_10_194432) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "promotion_category_id"
+    t.boolean "multi_coupon", default: false, null: false
     t.index ["advertise"], name: "index_spree_promotions_on_advertise"
     t.index ["code"], name: "index_spree_promotions_on_code", unique: true
     t.index ["expires_at"], name: "index_spree_promotions_on_expires_at"
@@ -1056,6 +1090,29 @@ ActiveRecord::Schema.define(version: 2019_07_10_194432) do
     t.index ["position"], name: "index_spree_taxons_on_position"
     t.index ["rgt"], name: "index_spree_taxons_on_rgt"
     t.index ["taxonomy_id"], name: "index_taxons_on_taxonomy_id"
+  end
+
+  create_table "spree_themes", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.string "state"
+    t.string "template_file_file_name"
+    t.string "template_file_content_type"
+    t.bigint "template_file_file_size"
+    t.datetime "template_file_updated_at"
+  end
+
+  create_table "spree_themes_templates", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.text "body"
+    t.string "path"
+    t.string "format"
+    t.string "locale"
+    t.string "handler"
+    t.boolean "partial", default: false
+    t.integer "theme_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["theme_id"], name: "index_spree_themes_templates_on_theme_id"
   end
 
   create_table "spree_trackers", id: :serial, force: :cascade do |t|

@@ -1,52 +1,75 @@
-# Material Instinct LLC - DNA Boilerplate for Admin UI
+# DOCKER SETUP
 
-Running the app locally (w/o Docker):
+## Build
+This should only have to be done once, or whenever the Gemfile is updated.
+```
+docker-compose build
+```
 
-Requirements: ruby 2.6.2, rails 5.2.2, Postgres
+## Create Containers
 
-1. Clone this repo
-1. Copy `.env.example` to `.env.development`
-1. Copy app secrets from shared Dashlane.app secure note into `.env.development`
-1. Create a local postgres database (dev & test)
-1. Create a local postgres user: `CREATE USER psycle_admin;`
-1. `ALTER USER <user> WITH SUPERUSER;`
-1. `GRANT ALL PRIVILEGES ON DATABASE <db> TO <user>;`
-1. Make sure the database creds match those in `.env.development`
-1. Run `bundle install`
-1. Run `rails g spree:install --user_class=Spree::User` (say "no" to all overwrites)
-1. Run `rails g spree:auth:install` (say "no" to all overwrites)
-1. Run `rails g spree_gateway:install`
-1. Run `rake db:schema:load`
-1. Run `rake db:seed`
-1. Run `rake spree_sample:load`
-1. Run `rails s`
+```
+docker-compose up
+```
 
-If you need to reset your local DB:
+DNA Admin should now be available at localhost:8080,
+but it probably needs to be set up first.
 
-1. Run `rake db:reset`
-1. Run `rake railties:install:migrations`
-1. Run `rake db:migrate`
-1. Run `rake db:seed`
-1. Run `rake spree_sample:load`
+## Set up system
 
----
+In a new terminal run:
+
+```
+docker-compose exec web rails db:create db:migrate db:schema:load &&
+docker-compose exec web rails db:seed &&
+docker-compose exec web rails spree_sample:load &&
+docker-compose restart
+```
+
+OPTIONAL: Create a new admin user.  This can be used to reset the
+admin user also:
+
+```
+docker-compose exec web rails spree_auth:admin:create
+```
+
+default is:
+
+email: spree@example.com
+
+password: spree123
+
+## Reset DB
+
+This will reset the existing database back to blank.
+
+```
+docker-compose exec web rails db:reset railties:install:migrations db:migrate db:seed spree_sample:load
+```
+
+You could also blow away all the DB files.  WARNING! You'll have to start 
+the install over again if you do this.
+
+```
+sudo rm -rf tmp/db
+```
+
+## TODO
 
 Other things we may need to cover:
 
-* Ruby version
+- Ruby version
 
-* System dependencies
+- System dependencies
 
-* Configuration
+- Configuration
 
-* Database creation
+- Database creation
 
-* Database initialization
+- Database initialization
 
-* How to run the test suite
+- How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+- Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
-
-* ...
+- Deployment instructions
