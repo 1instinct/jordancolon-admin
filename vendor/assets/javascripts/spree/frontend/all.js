@@ -4,12 +4,7 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require jquery
-//= require jquery_ujs
 //= require accounting.min
 //= require spree/frontend
 
 //= require_tree .
-//= require spree/frontend/spree_auth
-//= require spree/frontend/spree_promo_users_codes
-//= require spree/frontend/spree_digital
