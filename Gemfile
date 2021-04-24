@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.2'
+ruby '2.7.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.2'
+gem 'rails', '~> 6.1.3'
 # Use postgresql as the database for Active Record
-gem 'pg', '>= 0.18', '< 2.0'
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -40,12 +40,14 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem "aws-sdk-s3", require: false
 
-gem 'spree', '~> 3.7'
-gem 'spree_auth_devise', '~> 3.5'
-gem 'spree_gateway', '~> 3.4'
+gem 'spree', '~> 4.2.0.rc4'
+gem 'spree_auth_devise', '~> 4.3'
+gem 'spree_gateway', '~> 3.9'
 gem 'spree_static_content', github: 'spree-contrib/spree_static_content'
-gem 'spree_promo_users_codes', github: 'vinsol-spree-contrib/spree_promo_users_codes', branch: 'master'
 gem 'spree_digital', github: 'spree-contrib/spree_digital'
+
+# doesn't support spree 4
+#gem 'spree_promo_users_codes', github: 'vinsol-spree-contrib/spree_promo_users_codes', branch: 'master'
 
 gem 'sprockets-helpers', '~> 1.2.1'
 
