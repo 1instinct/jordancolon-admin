@@ -69,6 +69,10 @@ Each one is installed _after_ spree, with it's own migrations generated using a
 specific `bundle exec rails g` command, which can be found on the README of the github
 page for each project.  This only needs to be done once after spree is installed or upgraded.
 
+## Deploy
+
+This uses heroku ruby buildpack on the heroku-20 stack.
+
 ## TODO
 
 Other things we may need to cover:
