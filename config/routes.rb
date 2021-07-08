@@ -20,7 +20,15 @@ Spree::Core::Engine.add_routes do
 
     get "/messages" => "messages#index"
     get "/messages/support" => "messages#message_support"
+    get "pages/about_us" => "pages#about_us"
 
+  end
+  namespace :admin do
+    resources :menu_items, except: :show do
+      member do
+        get :children
+      end
+    end
   end
 
 end
