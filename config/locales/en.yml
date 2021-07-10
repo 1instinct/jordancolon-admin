@@ -489,6 +489,7 @@ en:
       refund: Refund
       save: Save
       update: Update
+      generate_playback: Generate Playback Id
     activate: Activate
     active: Active
     add: Add
@@ -573,6 +574,9 @@ en:
         store_credits: Store Credits
         no_store_credit: User has no Store Credit available.
         available_store_credit: User has %{amount} in Store Credit available.
+      live_stream:
+        list: Live stream list fetch successfully.
+        add_live_stream: New Live Stream
     administration: Administration
     advertise: Advertise
     agree_to_privacy_policy: Agree to Privacy Policy
@@ -843,6 +847,7 @@ en:
     height: Height
     home: Home
     help_center: Help Center
+    live_stream_index: LiveStreams
     i18n:
       available_locales: Available Locales
       fields: Fields
@@ -1595,3 +1600,22 @@ en:
     zipcode: Zip Code
     zone: Zone
     zones: Zones
+    start_at: Start Date Time
+    live_stream:
+      live_stream_deleted: Live Stream has been deleted
+      live_stream_show: Live Stream fetch successfully
+      live_stream_menu: Live Streams
+      generating: Generating Playback Id
+      fail_to_execute_request: "Fail to execute request with error :%{live_stream_real_time_error}"
+      update_success: Live Stream updated successfully.
+      added_success: Live Stream Added successfully.
+      list_success: Live Stream listed successfully.
+      product_ids: Select live stream products
+      live_stream_not_found: Live Stream not found.
+    user:
+      error:
+        user_exists: User exists with given email.
+        email_password_unmatch: Email and Password does not match. Please enter valid credentials.
+      success:
+        sign_up: User created successfully.
+        sign_in: User Sign in Successfully.
