@@ -39,6 +39,7 @@ Spree::Core::Engine.add_routes do
           post :sign_in
         end
       end
+      resources :pages, only: [:index]
     end
   end
 
