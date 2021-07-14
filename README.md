@@ -73,6 +73,23 @@ page for each project.  This only needs to be done once after spree is installed
 
 This uses heroku ruby buildpack on the heroku-20 stack.
 
+
+## Keeping Your Code Updated:
+
+When there are lots of active changes occuring on this repo, make sure to regularly:
+
+1. Commit (or stash) your local changes on your branch
+1. `git fetch origin`
+1. `git checkout main`
+1. `git pull origin main`
+1. `git checkout <your_branch>`
+1. `git merge main`
+1. Fix merge conflicts (if any)
+1. `git add .`
+1. `git commit -m 'merge in latest main'`
+
+Done!
+…now you will be up-to-date with latest code. Do this before you submit your PR, and you can be sure it will be a clean merge.
 ## TODO
 
 Other things we may need to cover:
