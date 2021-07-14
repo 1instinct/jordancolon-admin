@@ -41,6 +41,18 @@
   <% end %>
 
   <% if Spree.user_class && can?(:admin, Spree.user_class) %>
+    <ul class="nav nav-sidebar border-bottom" id="sidebarUsermenu">
+      <%= tab "Menu Navigator", url: new_admin_menu_item_path, icon: 'users.svg' %>
+    </ul>
+  <% end %>
+  
+  <% if can? :admin, LiveStream %>
+    <ul class="nav nav-sidebar border-bottom" id="sidebarLiveStream">
+      <%= tab :live_streams, icon: 'list.svg', url: admin_live_stream_index_path %>
+    </ul>
+  <% end %>
+
+  <% if Spree.user_class && can?(:admin, Spree.user_class) %>
     <ul class="nav nav-sidebar border-bottom" id="sidebarUser">
       <%= tab *Spree::BackendConfiguration::USER_TABS, url: spree.admin_users_path, icon: 'users.svg' %>
     </ul>
@@ -49,12 +61,6 @@
   <% if can? :admin, current_store %>
     <ul class="nav nav-sidebar border-bottom" id="sidebarConfiguration">
       <%= main_menu_tree Spree.t(:configurations), icon: "settings.svg", sub_menu: "configuration", url: "#sidebar-configuration" %>
-    </ul>
-  <% end %>
-
-  <% if can? :admin, LiveStream %>
-    <ul class="nav nav-sidebar border-bottom" id="sidebarLiveStream">
-      <%= tab :live_streams, icon: 'list.svg', url: admin_live_stream_index_path %>
     </ul>
   <% end %>
 </nav>

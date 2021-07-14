@@ -24,6 +24,8 @@ Spree::Core::Engine.add_routes do
 
     get "/messages" => "messages#index"
     get "/messages/support" => "messages#message_support"
+    get "pages/about_us" => "pages#about_us"
+
     resources :live_stream do
       collection do
         get :generate_playback
@@ -40,6 +42,13 @@ Spree::Core::Engine.add_routes do
         end
       end
       resources :pages, only: [:index, :show], param: :slug        
+    end
+  end
+  namespace :admin do
+    resources :menu_items, except: :show do
+      member do
+        get :children
+      end
     end
   end
 
