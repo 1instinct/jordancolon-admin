@@ -1619,3 +1619,9 @@ en:
       success:
         sign_up: User created successfully.
         sign_in: User Sign in Successfully.
+    page:
+      error:
+        page_not_found: Page not found with passed slug.
+      success:
+        page_list: Pages listed successfully.
+        show: Page fetch successfully.
