@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   # the default of "spree".
 
   mount Spree::Core::Engine, at: '/'
-
+  resources :apidocs, only: [:index] do
+    collection do
+      get 'swagger_ui'
+    end
+  end
 end
 
 Spree::Core::Engine.add_routes do
@@ -20,7 +24,32 @@ Spree::Core::Engine.add_routes do
 
     get "/messages" => "messages#index"
     get "/messages/support" => "messages#message_support"
+    get "pages/about_us" => "pages#about_us"
 
+    resources :live_stream do
+      collection do
+        get :generate_playback
+      end
+    end
+  end
+  namespace :api, constraints: { format: 'json' } do
+    namespace :v1 do
+      resources :live_stream
+      resources :users do
+        collection do
+          post :sign_up
+          post :sign_in
+        end
+      end
+      resources :pages, only: [:index, :show], param: :slug        
+    end
+  end
+  namespace :admin do
+    resources :menu_items, except: :show do
+      member do
+        get :children
+      end
+    end
   end
 
 end
