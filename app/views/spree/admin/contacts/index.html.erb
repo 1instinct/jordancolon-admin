@@ -1,0 +1,45 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:"admin.contact.list") %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:add_contact), spree.new_admin_contact_path, class: "btn-success", icon: 'add.svg' if can?(:create, Spree::Store) %>
+<% end %>
+
+<% if @contacts.present? %>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <th>Id</th>
+      <th>Actor Id</th>
+      <th>Full Name</th>
+      <th>Emails</th>
+      <th>Phone</th>
+      <th>Ip</th>
+      <th>Created At</th>
+      <th data-hook="admin_stores_index_header_actions" class="actions">Actions</th>
+    <thead>
+    <tbody>
+      <% @contacts.each do |contact| %>
+        <tr class="contact_<%= contact.id %>">
+          <td><%= link_to contact.id, admin_contact_path(contact.id) %></td>
+          <td><%= contact&.actor_id %></td>
+          <td><%= contact&.full_name %></td>
+          <td><%= contact&.email %></td>
+          <td><%= contact&.phone %></td>
+          <td><%= contact&.ip %></td>
+          <td><%= contact&.created_at %></td>
+          <td class="actions actions-2 text-right" data-hook="admin_contact_index_row_actions">
+            <%= link_to_edit_url spree.edit_admin_contact_path(id: contact.id), no_text: true if can?(:edit, contact) %>
+            <%= link_to_delete contact.id, no_text: true, url: admin_contact_path(id: contact.id) if can?(:destroy, contact.id) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Contact)) %>
+  </div>
+<% end %>
