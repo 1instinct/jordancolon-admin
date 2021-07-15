@@ -1142,6 +1142,9 @@ en:
       success:
         page_list: Pages listed successfully.
         show: Page fetch successfully.
+    contact:
+      success:
+          create: Create contact successfully.
     pagination:
       next_page: next page &raquo;
       previous_page: ! '&laquo; previous page'
