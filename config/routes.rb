@@ -41,7 +41,8 @@ Spree::Core::Engine.add_routes do
           post :sign_in
         end
       end
-      resources :pages, only: [:index, :show], param: :slug        
+      resources :pages, only: [:index, :show], param: :slug
+      resources :contacts, only: [:create]
     end
   end
   namespace :admin do
