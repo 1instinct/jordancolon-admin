@@ -45,10 +45,16 @@
       <%= tab "Menu Navigator", url: new_admin_menu_item_path, icon: 'users.svg' %>
     </ul>
   <% end %>
-  
+
   <% if can? :admin, LiveStream %>
     <ul class="nav nav-sidebar border-bottom" id="sidebarLiveStream">
       <%= tab :live_streams, icon: 'list.svg', url: admin_live_stream_index_path %>
+    </ul>
+  <% end %>
+
+  <% if can? :admin, Contact %>
+    <ul class="nav nav-sidebar border-bottom" id="sidebarContact">
+      <%= tab :contacts, icon: 'list.svg', url: admin_contacts_path %>
     </ul>
   <% end %>
 
