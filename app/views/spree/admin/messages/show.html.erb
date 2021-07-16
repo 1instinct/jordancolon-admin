@@ -1,0 +1,40 @@
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @contact } %>
+
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:contacts), spree.admin_contact_path %> /
+  <%= Spree.t(:contact_detail) %>
+<% end %>
+
+<%= form_for [:admin, @message], url: admin_message_path(id: @message.id), html: { multipart: true }, method: :patch do |f| %>
+  <fieldset data-hook="new_message">
+    <%= f.field_container :creator_id, class: ['form-group'] do %>
+      <%= f.label :name, Spree.t(:creator_id) %> <span class="required">*</span>
+      <%= f.text_field :creator_id, class: 'form-control creator_id', required: :required, readonly: :true %>
+      <%= f.error_message_on :creator_id %>
+    <% end %>
+
+    <%= f.field_container :recipients, class: ['form-group'] do %>
+      <%= f.label :name, Spree.t(:recipients) %> <span class="required">*</span>
+      <%= f.text_field :recipients, class: 'form-control recipients', required: :required, readonly: :true %>
+      <%= f.error_message_on :recipients %>
+    <% end %>
+
+    <%= f.field_container :is_received, class: ['form-group'] do %>
+      <%= f.label :name, Spree.t(:is_received) %> <span class="required">*</span>
+      <%= f.text_field :is_received, class: 'form-control is_received', required: :required, readonly: :true %>
+      <%= f.error_message_on :is_received %>
+    <% end %>
+
+    <%= f.field_container :is_read, class: ['form-group'] do %>
+      <%= f.label :name, Spree.t(:is_read) %> <span class="required">*</span>
+      <%= f.text_field :is_read, class: 'form-control is_read', required: :required, readonly: :true %>
+      <%= f.error_message_on :is_read %>
+    <% end %>
+
+    <%= f.field_container :sentiment, class: ['form-group'] do %>
+      <%= f.label :name, Spree.t(:sentiment) %> <span class="required">*</span>
+      <%= f.text_field :sentiment, class: 'form-control sentiment', required: :required, readonly: :true %>
+      <%= f.error_message_on :sentiment %>
+    <% end %>
+  </fieldset>
+<% end %>

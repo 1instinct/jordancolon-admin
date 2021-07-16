@@ -1,0 +1,45 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:"admin.message.list") %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:add_message), spree.new_admin_message_path, class: "btn-success", icon: 'add.svg' if can?(:create, Spree::Store) %>
+<% end %>
+
+<% if @messages.present? %>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <th>Id</th>
+      <th>Creator Id</th>
+      <th>Recipients</th>
+      <th>Is Received</th>
+      <th>Is Read</th>
+      <th>Sentiment</th>
+      <th>Created At</th>
+      <th data-hook="admin_stores_index_header_actions" class="actions">Actions</th>
+    <thead>
+    <tbody>
+      <% @messages.each do |message| %>
+        <tr class="contact_<%= message.id %>">
+          <td><%= link_to message.id, admin_message_path(message.id) %></td>
+          <td><%= message&.creator_id %></td>
+          <td><%= message&.recipients %></td>
+          <td><%= message&.is_received %></td>
+          <td><%= message&.is_read %></td>
+          <td><%= message&.sentiment %></td>
+          <td><%= message&.created_at %></td>
+          <td class="actions actions-2 text-right" data-hook="admin_message_index_row_actions">
+            <%= link_to_edit_url spree.edit_admin_message_path(id: message.id), no_text: true if can?(:edit, message) %>
+            <%= link_to_delete message.id, no_text: true, url: admin_message_path(id: message.id) if can?(:destroy, message.id) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Contact)) %>
+  </div>
+<% end %>
