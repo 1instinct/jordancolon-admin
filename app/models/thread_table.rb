@@ -1,0 +1,2 @@
+class ThreadTable < ApplicationRecord
+end
