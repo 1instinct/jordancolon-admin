@@ -228,7 +228,8 @@ en:
         one: Line Item
         other: Line Items
       spree/navigator:
-        <<: *labels
+        one: Menu
+        other: Menus
       spree/option_type:
         one: Option Type
         other: Option Types
