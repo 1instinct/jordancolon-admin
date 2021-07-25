@@ -1,13 +1,33 @@
-<tr data-link="/admin/messages/1" class="admin-convolist-tr">
+<tr data-link="/admin/messages/1" class="contact_<%= message.id %>">
+    <td><%= link_to message.id, admin_message_path(message.id) %></td>
     <td id="th-avatar">
         <div class="admin-msgs-avatar"></div>
     </td>
     <td id="th-name">
         <div class="admin-msgs-conversation-label">
-            <a href="/admin/messages/0">
-            <h3><%=username%></h3>
-            <p><%=msg%></p>
-            </a>
+            <span><%= message&.message %></span>
+            <% if message&.sender_type == "Spree::User" %>
+              <span>User</span>
+              <span><%= message&.sender&.email %></span>
+            <% elsif message&.sender_type == "Contact" %>
+              <span>Contact</span>
+              <span><%= message&.sender&.full_name %></span>
+            <% end %>
+            <% if message&.receiver_type == "Spree::User" %>
+              <span>User</span>
+              <span><%= message&.receiver&.email %></span>
+            <% elsif message&.receiver_type == "Contact" %>
+              <span>Contact</span>
+              <span><%= message&.sender&.full_name %></span>
+            <% end %>
+            <span><%= message&.is_received %></span>
+            <span><%= message&.is_read %></span>
+            <span><%= message&.sentiment %></span>
+            <span><%= message&.thread_table_id %></span>
+            <span class="actions actions-2 text-right" data-hook="admin_message_index_row_actions">
+              <%= link_to_edit_url spree.edit_admin_message_path(id: message.id), no_text: true if can?(:edit, message) %>
+              <%= link_to_delete message.id, no_text: true, url: admin_message_path(id: message.id) if can?(:destroy, message.id) %>
+            </span>
         </div>
     </td>
     <td id="th-time">

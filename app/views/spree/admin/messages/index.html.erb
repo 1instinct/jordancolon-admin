@@ -1,50 +1,65 @@
-<div class="admin-msgs-header">
-  <h2>Messages</h2>
-  <input class="admin-msgs-searchinput" type="text" placeholder="Search">
-</div>
+<% content_for :page_title do %>
+  <%= Spree.t(:"admin.message.list") %>
+<% end %>
 
-<div class="admin-msgs-gridcontainer">
-  <%# first col %>
-  <div>
-    <div class="admin-tableContainer">
-      <table class="table">
-        <thead class="admin-convolist-thead">
-          <%# conversation list by user %>
-          <th id="th-avatar">Avatar</th>
-          <th id="th-name">Name</th>
-          <th id="th-time">Time</th>
-          <th id="th-status">Status</th>
-        </thead>
-        <tbody class="admin-convolist-tbody">
-            <%= render 'conversation', username: "Andrew Matherson", msg: "Missing package" %>
-            <%= render 'conversation', username: "Marty Feldman", msg: "Still waiting" %>
-            <%= render 'conversation', username: "Theodore Roosevelt", msg: "Shipping options" %>
-            <%= render 'conversation', username: "Alan Cummings", msg: "Please change my order..." %>
-            <%= render 'conversation', username: "John C. Reiley", msg: "Thank you!" %>
-            <%= render 'conversation', username: "Jim Stanwick", msg: "Hello" %>
-            <%= render 'conversation', username: "Jenny McCarthy", msg: "Where is my ord..." %>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:add_message), spree.new_admin_message_path, class: "btn-success", icon: 'add.svg' if can?(:create, Spree::Store) %>
+<% end %>
 
-  <%# second col %>
-  <div class="admin-thread-list">
-    <div class="admin-top-controls">
-      <div>
-        <button></button>
-        <span>Create Support Ticket</span>
+<% content_for :table_filter do %>
+  <div data-hook="admin_products_sidebar">
+    <%= search_form_for [:admin, @search], url: admin_messages_path do |f| %>
+      <%- locals = {f: f} %>
+      <div data-hook="admin_products_index_search" class="row">
+        <div class="col-12 col-lg-6">
+          <div class="form-group">
+            <%= f.label :search_by_message, Spree.t(:title) %>
+            <%= f.text_field :search_by_message, size: 15, class: "form-control js-quick-search-target js-filterable" %>
+          </div>
+        </div>
+        </div>
       </div>
-    </div>
+      <div data-hook="admin_products_index_search_buttons" class="form-actions">
+        <%= button Spree.t(:search), 'search.svg' %>
+      </div>
+    <% end %>
+<% end %>
 
+<% if @collection.present? %>
+<%# <div class="table-responsive"> %>
+<div class="admin-msgs-gridcontainer">
+  <div>
+    <table class="table">
+      <thead>
+        <th>Id</th>
+        <th>Message</th>
+        <th>Sender Type</th>
+        <th>Sender email or name</th>
+        <th>Receiver Type</th>
+        <th>Receiver Id</th>
+        <th>Is Received</th>
+        <th>Is Read</th>
+        <th>Sentiment</th>
+        <th>Thread Id</th>
+        <th data-hook="admin_stores_index_header_actions" class="actions">Actions</th>
+      <thead>
+      <tbody>
+        <% @collection.each do |message| %>
+          <%= render 'conversation', message: message %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="admin-thread-list">
     <%# thread list (chatbubbles) %>
     <%= render "thread", user: "STEVE" %>
-    <div class="admin-thread-inputpanel">
-        <div class="admin-thread-userinput-wrapper">
-            <input class="admin-thread-userinput" type="text" placeholder="Type to chat">
-            <button></button>
-            <button></button>
-        </div>
-    </div>
   </div>
 </div>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Contact)) %>
+  </div>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @collection } %>
