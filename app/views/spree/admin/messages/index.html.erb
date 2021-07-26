@@ -7,10 +7,10 @@
 <% end %>
 
 <% content_for :table_filter do %>
-  <div data-hook="admin_products_sidebar">
+  <div data-hook="admin_messages_sidebar">
     <%= search_form_for [:admin, @search], url: admin_messages_path do |f| %>
       <%- locals = {f: f} %>
-      <div data-hook="admin_products_index_search" class="row">
+      <div data-hook="admin_messages_index_search" class="row">
         <div class="col-12 col-lg-6">
           <div class="form-group">
             <%= f.label :search_by_message, Spree.t(:title) %>
@@ -19,7 +19,7 @@
         </div>
         </div>
       </div>
-      <div data-hook="admin_products_index_search_buttons" class="form-actions">
+      <div data-hook="admin_messages_index_search_buttons" class="form-actions">
         <%= button Spree.t(:search), 'search.svg' %>
       </div>
     <% end %>
@@ -27,35 +27,63 @@
 
 <% if @collection.present? %>
 <%# <div class="table-responsive"> %>
-<div class="admin-msgs-gridcontainer">
-  <div>
+<div class="row">
+  <div class="col-lg-6 admin-msgs-gridcontainer">
     <table class="table">
       <thead>
-        <th>Id</th>
         <th>Message</th>
-        <th>Sender Type</th>
-        <th>Sender email or name</th>
-        <th>Receiver Type</th>
-        <th>Receiver Id</th>
-        <th>Is Received</th>
-        <th>Is Read</th>
+        <%# <th>Sender Type</th> %>
+        <th>Sender</th>
+        <%# <th>Receiver Type</th> %>
+        <%# <th>Receiver Id</th> %>
+        <%# <th>Is Received</th> %>
+        <%# <th>Is Read</th> %>
         <th>Sentiment</th>
-        <th>Thread Id</th>
-        <th data-hook="admin_stores_index_header_actions" class="actions">Actions</th>
+        <%# <th>Thread Id</th> %>
+        <%# <th data-hook="admin_stores_index_header_actions" class="actions">Actions</th> %>
       <thead>
       <tbody>
         <% @collection.each do |message| %>
-          <%= render 'conversation', message: message %>
+          <tr class="contact_<%= message.id %>">
+            <% if message&.is_read %>
+              <td><%= message&.message %></td>
+            <% else %>
+              <td><b><%= message&.message %></b></td>
+            <% end %>
+            <% if message&.sender_type == "Spree::User" %>
+              <td><%= message&.sender&.email %></td>
+            <% elsif message&.sender_type == "Contact" %>
+              <td><%= message&.sender&.full_name %></td>
+            <% end %>
+            <% if message&.receiver_type == "Spree::User" %>
+              <td><%= message&.receiver&.email %></td>
+            <% elsif message&.receiver_type == "Contact" %>
+              <td><%= message&.sender&.full_name %></td>
+            <% end %>
+            <td><%= message&.is_received %></td>
+            <td><%= message&.sentiment %></td>
+            <td><%= message&.thread_table_id %></td>
+            <td class="actions actions-2 text-right" data-hook="admin_message_index_row_actions">
+              <%= link_to_edit_url spree.edit_admin_message_path(id: message.id), no_text: true if can?(:edit, message) %>
+              <%= link_to_delete message.id, no_text: true, url: admin_message_path(id: message.id) if can?(:destroy, message.id) %>
+            </td>
+          </tr>
         <% end %>
       </tbody>
     </table>
   </div>
   
-  <div class="admin-thread-list">
+  <div class="col-lg-6 admin-thread-list">
     <%# thread list (chatbubbles) %>
     <%= render "thread", user: "STEVE" %>
+    <% if false %>
+      <% @collection.each do |message| %>
+        <%= render 'conversation', message: message %>
+      <% end %>
+    <% end %>
   </div>
 </div>
+
 <% else %>
   <div class="alert alert-info no-objects-found">
     <%= Spree.t(:no_resource_found, resource: plural_resource_name(Contact)) %>

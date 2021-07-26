@@ -12,6 +12,21 @@ class Message < Spree::Base
     end
   end
   after_create :assign_thread_id
+  after_create :notify_pusher
+      
+  def notify_pusher
+    # Do we need to create a new client here on every message?
+    pusher = Pusher::Client.new(
+      app_id: ENV['PUSHER_APP_ID'],
+      key: ENV['PUSHER_KEY'],
+      secret: ENV['PUSHER_SECRET'],
+      cluster: ENV['PUSHER_CLUSTER'],
+      encrypted: true
+    );
+    
+
+    pusher.trigger('messages', 'new-message', self.as_json)
+  end
 
   def assign_thread_id
     messages = message_transaction_between_two_parties(self.sender, self.receiver)

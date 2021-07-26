@@ -50,12 +50,20 @@ class Spree::Admin::MessagesController <  Spree::Admin::BaseController
 
 	def create
 		@message = Message.new(message_params)
+		# if @message.save
+		# 	flash[:success] = Spree.t('message.added_success')
+		# 	redirect_to admin_messages_path
+		# else
+		# 	flash[:error] = @message.errors.full_messages.join(', ')
+		# 	format.html { render :new }
+		# end
 		if @message.save
 			flash[:success] = Spree.t('message.added_success')
-			redirect_to admin_messages_path
+			format.html { redirect_to @message, notice: 'Message was successfully posted.' }
+			format.json { render :show, status: :created, location: @message }
 		else
-			flash[:error] = @message.errors.full_messages.join(', ')
 			format.html { render :new }
+			format.json { render json: @message.errors, status: :unprocessable_entity }
 		end
 	end
 
