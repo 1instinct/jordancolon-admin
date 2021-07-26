@@ -31,6 +31,7 @@ Spree::Core::Engine.add_routes do
         get :generate_playback
       end
     end
+    resources :menu_locations
   end
   namespace :api, constraints: { format: 'json' } do
     namespace :v1 do
@@ -41,7 +42,8 @@ Spree::Core::Engine.add_routes do
           post :sign_in
         end
       end
-      resources :pages, only: [:index, :show], param: :slug        
+      resources :pages, only: [:index, :show], param: :slug
+
     end
   end
   namespace :admin do
