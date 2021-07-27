@@ -228,8 +228,6 @@ en:
         one: Line Item
         other: Line Items
       spree/navigator:
-        one: Menu Item
-        other: Menu Items
       spree/option_type:
         one: Option Type
         other: Option Types
@@ -1142,6 +1140,15 @@ en:
       success:
         page_list: Pages listed successfully.
         show: Page fetch successfully.
+    menu_location:
+      success:
+          create: Menu Location add successfully.
+          update: Menu Location updated successfully.
+          index: Menu Location listed successfully.
+          delete: Menu Location deleted successfully.
+          show: Menu Location fetched successfully.
+      error:
+          not_found: Menu Location not found.
     pagination:
       next_page: next page &raquo;
       previous_page: ! '&laquo; previous page'
