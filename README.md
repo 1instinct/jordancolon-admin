@@ -5,12 +5,14 @@ This should only have to be done once, or whenever the Gemfile is updated.
 ```
 docker-compose build
 ```
+This will create a container of ~1.5GB on your disk.
 
 ## Create Containers
 
 ```
 docker-compose up
 ```
+You can add `-d` to run it in the background
 
 DNA Admin should now be available at localhost:8080,
 but it probably needs to be set up first.

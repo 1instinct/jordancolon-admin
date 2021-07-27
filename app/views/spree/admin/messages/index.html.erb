@@ -8,7 +8,7 @@
 
 <% content_for :table_filter do %>
   <div data-hook="admin_messages_sidebar">
-    <%= search_form_for [:admin, @search], url: admin_messages_path do |f| %>
+    <%= search_form_for [:admin, @q], url: admin_messages_path do |f| %>
       <%- locals = {f: f} %>
       <div data-hook="admin_messages_index_search" class="row">
         <div class="col-12 col-lg-6">
@@ -45,6 +45,7 @@
       <tbody>
         <% @collection.each do |message| %>
           <tr class="contact_<%= message.id %>">
+            <th scope="col"><%= sort_link(@q, :message, "Message", default_order: :asc) %></th>
             <% if message&.is_read %>
               <td><%= message&.message %></td>
             <% else %>
