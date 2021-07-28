@@ -42,7 +42,7 @@
 
   <% if Spree.user_class && can?(:admin, Spree.user_class) %>
     <ul class="nav nav-sidebar border-bottom" id="sidebarUsermenu">
-      <%= tab "Menu Navigator", url: new_admin_menu_item_path, icon: 'users.svg' %>
+      <%= tab "Menu Navigator", url: admin_menu_items_path, icon: 'users.svg' %>
     </ul>
   <% end %>
 
