@@ -1,0 +1,42 @@
+
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:messages), spree.admin_messages_path %> /
+  <% first_user = @user_1.class.to_s == "Spree::User" ? @user_1.email : @user_1.full_name %>
+  <% second_user = @user_1.class.to_s == "Spree::User" ? @user_2.email : @user_2.full_name %>
+  conversation between <%= first_user %> and <%= second_user %>
+<% end %>
+<% @threads.each do |thread| %>
+  <% thread.each do |message| %>
+    <% if message.sender == @user_1 %>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-2">
+          <b>
+            <%= sender = message.sender_type == "Spree::User" ?  message.sender.email : message.sender.full_name %>
+          </b>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6"><%= message.id %>  <%= message.message %></div>
+      </div>
+    </div>
+    <% elsif message.sender == @user_2  %>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <b>
+            <%= sender = message.sender_type == "Spree::User" ?  message.sender.email : message.sender.full_name %>
+          </b>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm"><%= message.id %>  <%= message.message %></div>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+  <hr size="1" width="" color="black">
+<% end %>
