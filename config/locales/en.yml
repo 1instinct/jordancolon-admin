@@ -914,6 +914,7 @@ en:
     lifetime_stats: Lifetime Stats
     line_item_adjustments: "Line item adjustments"
     list: List
+    menu_location: Menu Location
     live_stream:
       live_stream_deleted: Live Stream has been deleted
       live_stream_show: Live Stream fetch successfully
