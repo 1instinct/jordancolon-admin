@@ -25,6 +25,8 @@ class ApidocsController < ActionController::Base
     Spree::Api::V1::LiveStreamController,
     Spree::Api::V1::UsersController,
     Spree::Api::V1::PagesController,
+    Spree::Api::V1::MenuLocationsController,
+    Spree::Api::V1::MenuItemsController,
     SwaggerGlobalModel,
     self,
   ].freeze

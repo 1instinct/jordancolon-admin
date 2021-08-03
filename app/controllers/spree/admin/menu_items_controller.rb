@@ -1,25 +1,28 @@
 module Spree
   module Admin
-    class MenuItemsController < BaseController
+    class MenuItemsController < Spree::Admin::BaseController
       before_action :set_menu_item, only: [:edit, :update, :destroy, :children]
 
       def index
-         @menu_items = Spree::MenuItem.top_level
+         @menu_items = MenuItem.top_level
+         @menu_location = MenuLocation.all
 
-        respond_to do |format|
-          format.html
-          format.json { render :children, status: :ok }
-        end
+         if params[:menu_location_id].present?
+           @menu_items = MenuLocation.find_by(id: params[:menu_location_id].to_i).menu_items
+         end
+          respond_to do |format|
+            format.html
+            format.json { render :children, status: :ok }
+          end
       end
 
       def new
-        @menu_item = Spree::MenuItem.new
+        @menu_location = MenuLocation.all
+        @menu_item = MenuItem.new
       end
 
       def create
-
-        @menu_item = Spree::MenuItem.new(menu_item_params)
-
+        @menu_item = MenuItem.new(menu_item_params)
         respond_to do |format|
           if @menu_item.save
             format.html { submit_success_redirect(:create) }
@@ -53,12 +56,13 @@ module Spree
       end
 
       def children
-        @menu_items = Spree::MenuItem.find(params[:id]).childrens
+        @menu_items = MenuItem.find(params[:id]).childrens
 
         respond_to do |format|
           format.json { render :children, status: :ok }
         end
       end
+
 
       protected
 
@@ -74,7 +78,8 @@ module Spree
       end
 
       def set_menu_item
-        @menu_item = Spree::MenuItem.find(params[:id].to_i)
+        @menu_item = MenuItem.find(params[:id].to_i)
+        @menu_location = MenuLocation.all
       end
 
       def permitted_menu_item_attributes
@@ -85,7 +90,8 @@ module Spree
           :item_class,
           :item_target,
           :parent_id,
-          :position
+          :position,
+          :menu_location_id
         ]
       end
 
@@ -98,11 +104,11 @@ module Spree
       end
 
       def organize_items
-        Spree::MenuItem.where(parent_id: menu_item_params[:parent_id])
+        MenuItem.where(parent_id: menu_item_params[:parent_id])
           .order(updated_at: :desc)
           .map(&:id)
           .each_with_index do |id, index|
-          Spree::MenuItem.find(id).update(position: index)
+          MenuItem.find(id).update(position: index)
         end
       end
     end
