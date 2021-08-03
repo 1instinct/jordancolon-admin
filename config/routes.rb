@@ -19,6 +19,10 @@ end
 Spree::Core::Engine.add_routes do
   namespace :admin, path: Spree.admin_path do
     resources :messages do
+      collection do
+        get :conversation
+        get :conversations
+      end
       resources :message_support, only: [:index]
     end
 
@@ -31,7 +35,14 @@ Spree::Core::Engine.add_routes do
         get :generate_playback
       end
     end
+    resources :contacts
+    resources :threads do
+      member do
+        get :conversation
+      end
+    end
     resources :menu_locations
+
   end
   namespace :api, constraints: { format: 'json' } do
     namespace :v1 do
@@ -43,6 +54,9 @@ Spree::Core::Engine.add_routes do
         end
       end
       resources :pages, only: [:index, :show], param: :slug
+      resources :contacts
+      resources :messages
+      resources :threads
       resources :menu_locations
       resources :menu_items
     end
