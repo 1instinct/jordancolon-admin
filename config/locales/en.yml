@@ -228,8 +228,6 @@ en:
         one: Line Item
         other: Line Items
       spree/navigator:
-        one: Menu Item
-        other: Menu Items
       spree/option_type:
         one: Option Type
         other: Option Types
@@ -916,6 +914,7 @@ en:
     lifetime_stats: Lifetime Stats
     line_item_adjustments: "Line item adjustments"
     list: List
+    menu_location: Menu Location
     live_stream:
       live_stream_deleted: Live Stream has been deleted
       live_stream_show: Live Stream fetch successfully
@@ -1169,7 +1168,24 @@ en:
           show: Thread fetched successfully.
       error:
           not_found: Thread not found.
-
+    menu_location:
+      success:
+          create: Menu Location add successfully.
+          update: Menu Location updated successfully.
+          index: Menu Location listed successfully.
+          delete: Menu Location deleted successfully.
+          show: Menu Location fetched successfully.
+      error:
+          not_found: Menu Location not found.
+    menu_item:
+      success:
+          create: Menu Item add successfully.
+          update: Menu Item updated successfully.
+          index: Menu Item listed successfully.
+          delete: Menu Item deleted successfully.
+          show: Menu Item fetched successfully.
+      error:
+          not_found: Menu Item not found.
     pagination:
       next_page: next page &raquo;
       previous_page: ! '&laquo; previous page'

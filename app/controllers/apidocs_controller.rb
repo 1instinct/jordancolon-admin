@@ -28,6 +28,8 @@ class ApidocsController < ActionController::Base
     Spree::Api::V1::ContactsController,
     Spree::Api::V1::MessagesController,
     Spree::Api::V1::ThreadsController,
+    Spree::Api::V1::MenuLocationsController,
+    Spree::Api::V1::MenuItemsController,
     SwaggerGlobalModel,
     self,
   ].freeze

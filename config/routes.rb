@@ -18,7 +18,7 @@ end
 
 Spree::Core::Engine.add_routes do
   namespace :admin, path: Spree.admin_path do
-    resources :messages do      
+    resources :messages do
       collection do
         get :conversation
         get :conversations
@@ -28,7 +28,7 @@ Spree::Core::Engine.add_routes do
 
     get "/messages" => "messages#index"
     get "/messages/support" => "messages#message_support"
-    get "pages/about_us" => "pages#about_us"
+    get "/menu_items/show_menu_item" => "menu_items#show_menu_item"
 
     resources :live_stream do
       collection do
@@ -41,6 +41,8 @@ Spree::Core::Engine.add_routes do
         get :conversation
       end
     end
+    resources :menu_locations
+
   end
   namespace :api, constraints: { format: 'json' } do
     namespace :v1 do
@@ -55,6 +57,8 @@ Spree::Core::Engine.add_routes do
       resources :contacts
       resources :messages
       resources :threads
+      resources :menu_locations
+      resources :menu_items
     end
   end
   namespace :admin do
