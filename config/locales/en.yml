@@ -955,22 +955,7 @@ en:
     max_items: Max Items
     member_since: Member Since
     memo: Memo
-    meta_description: Meta Description
-    meta_keywords: Meta Keywords
-    meta_title: Meta Title
-    metadata: Metadata
-    mutable: Mutable
-    minimal_amount: Minimal Amount
-    missing_return_authorization: ! 'Missing Return Authorization for %{item_name}.'
-    month: Month
-    more: More
-    move_stock_between_locations: Move Stock Between Locations
-    my_account: My Account
-    my_orders: My Orders
-    name: Name
-    name_on_card: Name on card
-    name_or_sku: Name or SKU (enter at least first 3 characters of product name)
-    navigator:
+    menu_navigator:
       admin:
         no_resource_found: No menu items found
         sidebar: Navigation Manager
@@ -981,6 +966,7 @@ en:
         button:
           back: Back to Menu Items
           new: New Menu Item
+          new_menu_location: New Menu
         table:
           header:
             name: Name
@@ -1004,6 +990,21 @@ en:
             create: 'Menu item `%{name}` has been successfully created!'
             update: 'Menu item `%{name}` has been successfully updated!'
             destroy: 'Menu item `%{name}` has been successfully removed!'
+    meta_description: Meta Description
+    meta_keywords: Meta Keywords
+    meta_title: Meta Title
+    metadata: Metadata
+    mutable: Mutable
+    minimal_amount: Minimal Amount
+    missing_return_authorization: ! 'Missing Return Authorization for %{item_name}.'
+    month: Month
+    more: More
+    move_stock_between_locations: Move Stock Between Locations
+    my_account: My Account
+    my_orders: My Orders
+    name: Name
+    name_on_card: Name on card
+    name_or_sku: Name or SKU (enter at least first 3 characters of product name)
     new: New
     new_adjustment: New Adjustment
     new_customer: New Customer
