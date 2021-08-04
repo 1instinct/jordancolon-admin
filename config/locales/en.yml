@@ -1141,6 +1141,33 @@ en:
       success:
         page_list: Pages listed successfully.
         show: Page fetch successfully.
+    contact:
+      success:
+          create: Contact Detail created successfully.
+          update: Contact Detail updated successfully.
+          index: Contact Detail listed successfully.
+          delete: Contact deleted successfully.
+          show: Contact Detail fetched successfully.
+      error:
+          not_found: Contact not found.
+    message:
+      success:
+          create: Message sent successfully.
+          update: Message updated successfully.
+          index: Message listed successfully.
+          delete: Message deleted successfully.
+          show: Message fetched successfully.
+      error:
+          not_found: Message not found.
+    thread:
+      success:
+          create: Thread created successfully.
+          update: Thread updated successfully.
+          index: Thread listed successfully.
+          delete: Thread deleted successfully.
+          show: Thread fetched successfully.
+      error:
+          not_found: Thread not found.
     menu_location:
       success:
           create: Menu Location add successfully.

@@ -61,6 +61,10 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'prettier'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # use to seed the records
+  gem "factory_bot_rails"
+  # Use to generate fake data
+  gem 'faker'
 end
 
 group :development do
