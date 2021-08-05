@@ -6,7 +6,18 @@ class Spree::Admin::MessagesController <  Spree::Admin::BaseController
 	end
 
 	def conversations
-		@users_array = Message.pluck(:sender_id, :sender_type, :receiver_id, :receiver_type).uniq
+		@users_array = []
+		users_array = Message.pluck(:sender_id, :sender_type, :receiver_id, :receiver_type).uniq
+		users_array.each do |user_hash|
+				unless @users_array.find { |x| x[:receiver_id] == user_hash.first && x[:receiver_type] == user_hash.second }.present? && @users_array.find { |x| x[:sender_id] == user_hash.third && x[:sender_type] == user_hash.fourth }.present?
+					@users_array << {
+						sender_id: user_hash.first,
+						sender_type: user_hash.second,
+						receiver_id: user_hash.third,
+						receiver_type: user_hash.fourth
+					}
+				end
+		end
 		if params[:users].present?
 			users = []
 			params[:users].each do |user|
