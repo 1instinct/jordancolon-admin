@@ -1,10 +1,27 @@
 class Message < Spree::Base
+  # require
+  # includes
+  # constants
+  # enums
+  # associations
   belongs_to :sender, polymorphic: true
   belongs_to :receiver, polymorphic: true
-  belongs_to :thread_table, class_name: "ThreadTable", optional: :true
-
+  belongs_to :thread_table, optional: :true
+  # attr_accessors
+  # callbacks
+  after_create :assign_thread_id
+  # nested_attribute_for_form
+  # validations
+  validate :sender_and_receiver_should_be_different
+  # scopes
+  # methods
   self.whitelisted_ransackable_attributes = %w[message]
   self.whitelisted_ransackable_scopes = %w[search_by_message]
+  def sender_and_receiver_should_be_different
+    if sender_id == receiver_id && sender_type == receiver_type
+      errors.add(:sender_id, "and Receiver should not be same.")
+    end
+  end
 
   def self.search_by_message(query)
     if defined?(SpreeGlobalize)
@@ -13,7 +30,6 @@ class Message < Spree::Base
       where("LOWER(#{Message.table_name}.message) LIKE LOWER(:query)", query: "%#{query}%")
     end
   end
-  after_create :assign_thread_id
 
   def assign_thread_id
     unless self.thread_table_id.present?
