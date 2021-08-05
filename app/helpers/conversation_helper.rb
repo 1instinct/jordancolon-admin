@@ -1,5 +1,6 @@
 module ConversationHelper
   def fetch_users(user_hash)
+    user_hash = [user_hash[:sender_id],user_hash[:sender_type], user_hash[:receiver_id], user_hash[:receiver_type]]    
     users = []
     if user_hash.second == "Spree::User"
       user_1 = Spree::User.find_by_id(user_hash.first)
