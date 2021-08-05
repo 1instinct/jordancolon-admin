@@ -63,7 +63,7 @@ class Spree::Api::V1::MessagesController < Spree::Api::BaseController
         key :name, 'message[message]'
         key :in, :formData
         key :description, "message"
-        key :required, true
+        key :required, false
         key :type, :string
       end
       parameter do
