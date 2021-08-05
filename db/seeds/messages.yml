@@ -6,6 +6,6 @@
   receiver_id: <%= Spree::User.pluck(:id).sample %>
   is_received: true
   is_read: true
-  sentiment: <%= 1 %>
+  sentiment: <%= rand(1..5) %>
   message: <%= Faker::Lorem.sentence %>
 <% end %>
