@@ -228,8 +228,6 @@ en:
         one: Line Item
         other: Line Items
       spree/navigator:
-        one: Menu Item
-        other: Menu Items
       spree/option_type:
         one: Option Type
         other: Option Types
@@ -916,6 +914,7 @@ en:
     lifetime_stats: Lifetime Stats
     line_item_adjustments: "Line item adjustments"
     list: List
+    menu_location: Menu Location
     live_stream:
       live_stream_deleted: Live Stream has been deleted
       live_stream_show: Live Stream fetch successfully
@@ -956,22 +955,7 @@ en:
     max_items: Max Items
     member_since: Member Since
     memo: Memo
-    meta_description: Meta Description
-    meta_keywords: Meta Keywords
-    meta_title: Meta Title
-    metadata: Metadata
-    mutable: Mutable
-    minimal_amount: Minimal Amount
-    missing_return_authorization: ! 'Missing Return Authorization for %{item_name}.'
-    month: Month
-    more: More
-    move_stock_between_locations: Move Stock Between Locations
-    my_account: My Account
-    my_orders: My Orders
-    name: Name
-    name_on_card: Name on card
-    name_or_sku: Name or SKU (enter at least first 3 characters of product name)
-    navigator:
+    menu_navigator:
       admin:
         no_resource_found: No menu items found
         sidebar: Navigation Manager
@@ -982,6 +966,7 @@ en:
         button:
           back: Back to Menu Items
           new: New Menu Item
+          new_menu_location: New Menu
         table:
           header:
             name: Name
@@ -1005,6 +990,21 @@ en:
             create: 'Menu item `%{name}` has been successfully created!'
             update: 'Menu item `%{name}` has been successfully updated!'
             destroy: 'Menu item `%{name}` has been successfully removed!'
+    meta_description: Meta Description
+    meta_keywords: Meta Keywords
+    meta_title: Meta Title
+    metadata: Metadata
+    mutable: Mutable
+    minimal_amount: Minimal Amount
+    missing_return_authorization: ! 'Missing Return Authorization for %{item_name}.'
+    month: Month
+    more: More
+    move_stock_between_locations: Move Stock Between Locations
+    my_account: My Account
+    my_orders: My Orders
+    name: Name
+    name_on_card: Name on card
+    name_or_sku: Name or SKU (enter at least first 3 characters of product name)
     new: New
     new_adjustment: New Adjustment
     new_customer: New Customer
@@ -1142,6 +1142,51 @@ en:
       success:
         page_list: Pages listed successfully.
         show: Page fetch successfully.
+    contact:
+      success:
+          create: Contact Detail created successfully.
+          update: Contact Detail updated successfully.
+          index: Contact Detail listed successfully.
+          delete: Contact deleted successfully.
+          show: Contact Detail fetched successfully.
+      error:
+          not_found: Contact not found.
+    message:
+      success:
+          create: Message sent successfully.
+          update: Message updated successfully.
+          index: Message listed successfully.
+          delete: Message deleted successfully.
+          show: Message fetched successfully.
+      error:
+          not_found: Message not found.
+    thread:
+      success:
+          create: Thread created successfully.
+          update: Thread updated successfully.
+          index: Thread listed successfully.
+          delete: Thread deleted successfully.
+          show: Thread fetched successfully.
+      error:
+          not_found: Thread not found.
+    menu_location:
+      success:
+          create: Menu Location add successfully.
+          update: Menu Location updated successfully.
+          index: Menu Location listed successfully.
+          delete: Menu Location deleted successfully.
+          show: Menu Location fetched successfully.
+      error:
+          not_found: Menu Location not found.
+    menu_item:
+      success:
+          create: Menu Item add successfully.
+          update: Menu Item updated successfully.
+          index: Menu Item listed successfully.
+          delete: Menu Item deleted successfully.
+          show: Menu Item fetched successfully.
+      error:
+          not_found: Menu Item not found.
     pagination:
       next_page: next page &raquo;
       previous_page: ! '&laquo; previous page'
