@@ -7,8 +7,12 @@
             <div class="px-4 d-none d-md-block">
               <div class="d-flex align-items-center">
                 <div class="flex-grow-1">
-                  <%= text_field_tag :search, "", class: 'form-control my-3', placeholder: "Search..." %>
-                  <%= submit_tag "Search" %>
+                  <div class="input-group">
+                    <%= text_field_tag :search, "", class: 'form-control my-3', placeholder: "Search..." %>
+                    <span class="input-group-btn">
+                      <%= submit_tag "Search", class: 'btn btn-primary my-3' %>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
