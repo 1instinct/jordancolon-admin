@@ -9,14 +9,35 @@ class Spree::Admin::MessagesController <  Spree::Admin::BaseController
 		@users_array = []
 		users_array = Message.pluck(:sender_id, :sender_type, :receiver_id, :receiver_type).uniq
 		users_array.each do |user_hash|
-				unless @users_array.find { |x| x[:receiver_id] == user_hash.first && x[:receiver_type] == user_hash.second }.present? && @users_array.find { |x| x[:sender_id] == user_hash.third && x[:sender_type] == user_hash.fourth }.present?
-					@users_array << {
-						sender_id: user_hash.first,
-						sender_type: user_hash.second,
-						receiver_id: user_hash.third,
-						receiver_type: user_hash.fourth
-					}
+			unless @users_array.find { |x| x[:receiver_id] == user_hash.first && x[:receiver_type] == user_hash.second }.present? && @users_array.find { |x| x[:sender_id] == user_hash.third && x[:sender_type] == user_hash.fourth }.present?
+				if user_hash.second == "Spree::User"
+					name_1 = Spree::User.find_by_id(user_hash.first).email
+				elsif user_hash.second == "Contact"
+					name_1 = Spree.user.find_by_id(user_hash.first).full_name
 				end
+				if user_hash.fourth == "Spree::User"
+					name_2 = Spree::User.find_by_id(user_hash.third).email
+				elsif user_hash.fourth == "Contact"
+					name_2 = Spree.user.find_by_id(user_hash.third).full_name
+				end
+				@users_array << {
+					sender_id: user_hash.first,
+					sender_type: user_hash.second,
+					receiver_id: user_hash.third,
+					receiver_type: user_hash.fourth,
+					name_1: name_1,
+					name_2: name_2
+				}
+			end
+		end
+		search_user_array =[]
+		if params[:search].present?
+			@users_array.each do |user_hash|
+				if user_hash[:name_1].include?(params[:search]) || user_hash[:name_2].include?(params[:search])
+					search_user_array << user_hash
+				end
+			end
+			@users_array = search_user_array
 		end
 		if params[:users].present?
 			users = []
@@ -36,7 +57,46 @@ class Spree::Admin::MessagesController <  Spree::Admin::BaseController
 			thread_ids.each do |thread_id|
 				@threads << one_to_one_messages.where(thread_table_id: thread_id)
 			end
-			puts @threads.inspect
+		end
+	end
+	
+	def search_contacts
+		@users_array = []
+		users_array = Message.pluck(:sender_id, :sender_type, :receiver_id, :receiver_type).uniq
+		users_array.each do |user_hash|
+			unless @users_array.find { |x| x[:receiver_id] == user_hash.first && x[:receiver_type] == user_hash.second }.present? && @users_array.find { |x| x[:sender_id] == user_hash.third && x[:sender_type] == user_hash.fourth }.present?
+				if user_hash.second == "Spree::User"
+					name_1 = Spree::User.find_by_id(user_hash.first).email
+				elsif user_hash.second == "Contact"
+					name_1 = Spree.user.find_by_id(user_hash.first).full_name
+				end
+				if user_hash.fourth == "Spree::User"
+					name_2 = Spree::User.find_by_id(user_hash.third).email
+				elsif user_hash.fourth == "Contact"
+					name_2 = Spree.user.find_by_id(user_hash.third).full_name
+				end
+				@users_array << {
+					sender_id: user_hash.first,
+					sender_type: user_hash.second,
+					receiver_id: user_hash.third,
+					receiver_type: user_hash.fourth,
+					name_1: name_1,
+					name_2: name_2
+				}
+			end
+		end
+		search_user_array =[]
+		if params[:search].present?
+			@users_array.each do |user_hash|
+				if user_hash[:name_1].include?(params[:search]) || user_hash[:name_2].include?(params[:search])
+					search_user_array << user_hash
+				end
+			end
+			@users_array = search_user_array
+		end
+		respond_to do |format|
+			format.html
+			format.js { render :search_contacts, users_array: @users_array }
 		end
 	end
 
