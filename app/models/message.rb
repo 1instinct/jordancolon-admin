@@ -10,6 +10,7 @@ class Message < Spree::Base
   # attr_accessors
   # callbacks
   after_create :assign_thread_id
+  after_create :notify_pusher
   # nested_attribute_for_form
   # validations
   validate :sender_and_receiver_should_be_different
@@ -47,6 +48,11 @@ class Message < Spree::Base
         self.update(thread_table_id: thread_table.id)
       end
     end
+  end
+  def notify_pusher
+    puts "-------------------------------------"
+    Pusher.trigger('chat', 'new-chat', self.as_json)
+    puts "-------------------------------------"
   end
 
   def message_transaction_between_two_parties(user_1, user_2)
