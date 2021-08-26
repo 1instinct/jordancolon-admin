@@ -11,7 +11,6 @@ module Spree
 
       def index
         params[:q] ||= {}
-        # @show_only_completed = params[:q][:completed_at_not_null] == '0'
         if params[:q][:completed_at_not_null].present? && params[:q][:completed_at_not_null] == '1'
           params[:q][:completed_at_not_null] ||= '1' if Spree::Config[:show_only_complete_orders_by_default]
           @show_only_completed = params[:q][:completed_at_not_null] == '1'
@@ -44,14 +43,17 @@ module Spree
                                          ''
                                        end
         end
-                
+
         if @show_only_completed
           params[:q][:completed_at_gt] = params[:q].delete(:created_at_gt)
           params[:q][:completed_at_lt] = params[:q].delete(:created_at_lt)
         end
-
-        @search = Spree::Order.preload(:user).accessible_by(current_ability, :index).ransack(params[:q])
-
+        if params[:q][:state_eq].present? && params[:q][:state_eq] == 'incomplete'
+          params[:q][:state_eq] = ''
+          @search = Spree::Order.preload(:user).accessible_by(current_ability, :index).incomplete.ransack(params[:q])
+        else
+          @search = Spree::Order.preload(:user).accessible_by(current_ability, :index).ransack(params[:q])
+        end
         # lazy loading other models here (via includes) may result in an invalid query
         # e.g. SELECT  DISTINCT DISTINCT "spree_orders".id, "spree_orders"."created_at" AS alias_0 FROM "spree_orders"
         # see https://github.com/spree/spree/pull/3919
@@ -84,8 +86,7 @@ module Spree
       end
 
       def store
-        @stores = Spree::Store.all
-        puts "-----------------------------------------------"
+        @stores = Spree::Store.all        
       end
 
       def update
