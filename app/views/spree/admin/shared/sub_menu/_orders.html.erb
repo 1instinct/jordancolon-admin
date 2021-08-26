@@ -1,0 +1,6 @@
+<ul id="sidebar-orders" class="border-top bg-white collapse nav nav-pills nav-stacked" data-hook="admin_order_sub_tabs">
+  <%= tab "All Orders", url: admin_orders_path %>
+  <%= tab "Complete Orders", url: admin_orders_path %>
+  <%= tab "In-Complete Orders", url: admin_orders_path %>
+  <%= tab "Cart Orders", url: admin_orders_path(:q => {:state => 'cart' }) %>
+</ul>
