@@ -24,7 +24,7 @@ class ApidocsController < ActionController::Base
   SWAGGERED_CLASSES_V1 = [
     #SwaggerController, #controller details goes from here where from you are creating api
     Spree::Api::V1::LiveStreamController,
-    Spree::Api::V1::UsersController,
+    Spree::Api::V1::UserAuthenticationController,
     Spree::Api::V1::PagesController,
     Spree::Api::V1::ContactsController,
     Spree::Api::V1::MessagesController,
