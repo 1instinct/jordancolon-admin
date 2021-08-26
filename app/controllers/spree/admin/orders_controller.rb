@@ -11,9 +11,14 @@ module Spree
 
       def index
         params[:q] ||= {}
-        params[:q][:completed_at_not_null] ||= '1' if Spree::Config[:show_only_complete_orders_by_default]
-        @show_only_completed = params[:q][:completed_at_not_null] == '1'
-        params[:q][:s] ||= @show_only_completed ? 'completed_at desc' : 'created_at desc'
+        # @show_only_completed = params[:q][:completed_at_not_null] == '0'
+        if params[:q][:completed_at_not_null].present? && params[:q][:completed_at_not_null] == '1'
+          params[:q][:completed_at_not_null] ||= '1' if Spree::Config[:show_only_complete_orders_by_default]
+          @show_only_completed = params[:q][:completed_at_not_null] == '1'
+          params[:q][:s] ||= @show_only_completed ? 'completed_at desc' : 'created_at desc'
+        else
+          @show_only_completed = false
+        end
         params[:q][:completed_at_not_null] = '' unless @show_only_completed
 
         # As date params are deleted if @show_only_completed, store
@@ -39,7 +44,7 @@ module Spree
                                          ''
                                        end
         end
-
+                
         if @show_only_completed
           params[:q][:completed_at_gt] = params[:q].delete(:created_at_gt)
           params[:q][:completed_at_lt] = params[:q].delete(:created_at_lt)
