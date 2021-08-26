@@ -43,8 +43,7 @@ module Spree
         end
 
         def load_order
-          @order = Order.includes(:adjustments).find_by!(number: params[:order_id])
-          puts "^^^^^^^^^^^^^^^^^^^^#{@order.inspect}"
+          @order = Order.includes(:adjustments).find_by!(number: params[:order_id])          
         end
 
         def model_class
