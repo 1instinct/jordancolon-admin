@@ -6,7 +6,13 @@ set -e
 #  sudo rm -rf tmp/db
 
 docker-compose build
-docker-compose up -d && sleep 5
+docker-compose up -d
+
+# wait for postgres to come up
+while ! nc -zv localhost 5433 ; do
+    echo "Waiting for postgres to come up..."
+    sleep 5
+done
 
 docker-compose exec web rails db:create db:schema:load db:migrate
 docker-compose exec \
@@ -19,6 +25,8 @@ docker-compose exec \
     web bundle exec rake spree_sample:load
 
 docker-compose restart web
+
+echo "App is now running at http://localhost:8080"
 
 # to follow logs...
 #   docker-compose logs -f
