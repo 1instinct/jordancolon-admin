@@ -1,0 +1,71 @@
+<main class="content">
+  <div class="container p-0">
+    <div class="card">
+      <div class="row g-0">
+        <div class="col-12 col-lg-5 col-xl-4 border-right">
+          <%= form_with url: search_contacts_admin_messages_path, method: :get do |form| %>
+            <div class="px-4 d-none d-md-block">
+              <div class="d-flex align-items-center">
+                <div class="flex-grow-1">
+                  <div class="input-group">
+                    <%= text_field_tag :search, "", class: 'form-control my-3', placeholder: "Search..." %>
+                    <span class="input-group-btn">
+                      <%= submit_tag "Search", class: 'btn btn-primary my-3' %>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <div id="user_chat_list">
+            <%= render :partial => 'spree/admin/messages/admin_chat_list', locals: { users_array: @users_array, admin_user: @admin_user } %>
+          </div>
+          <hr class="d-block d-lg-none mt-1 mb-0">
+        </div>
+        <div class="col-12 col-lg-7 col-xl-8">
+          <div class="py-2 px-4 border-bottom d-none d-lg-block">
+            <div class="d-flex align-items-center py-1">
+              <div class="position-relative">
+                <h4>Conversation</h4>
+              </div>
+            </div>
+          </div>
+          <div class="position-relative">
+            <div class="chat-messages p-4">
+              <% if @threads.present? %>
+                <% @threads.each do |thread| %>
+                  <% thread.each do |message| %>
+                    <% if message.sender == @user_1 %>
+                      <div class="chat-message-right pb-4">
+                        <div>
+                          <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                          <div class="text-muted small text-nowrap mt-2"><%= distance_of_time_in_words(message.created_at, Time.now) %></div>
+                        </div>
+                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                          <div class="font-weight-bold mb-1"><%= sender = message.sender_type == "Spree::User" ?  message.sender.email : message.sender.full_name %></div>
+                          <%= message.message %> <p>&#128512;</p>
+                        </div>
+                      </div>
+                    <% elsif message.sender == @user_2  %>
+                      <div class="chat-message-left pb-4">
+                        <div>
+                          <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                          <div class="text-muted small text-nowrap mt-2"><%= distance_of_time_in_words(message.created_at, Time.now) %></div>
+                        </div>
+                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                          <div class="font-weight-bold mb-1"><%= sender = message.sender_type == "Spree::User" ?  message.sender.email : message.sender.full_name %></div>
+                          <%= message.message %> <p>&#128512;</p>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                  <hr width=100%>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
