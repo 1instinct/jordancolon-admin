@@ -23,6 +23,7 @@ Spree::Core::Engine.add_routes do
         get :conversation
         get :conversations
         get :search_contacts
+        get :admin_conversations
       end
       resources :message_support, only: [:index]
     end
