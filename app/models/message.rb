@@ -35,7 +35,7 @@ class Message < Spree::Base
   def assign_thread_id
     unless self.thread_table_id.present?
       messages = message_transaction_between_two_parties(self.sender, self.receiver)
-      message = messages.first
+      message = messages.last
       if messages.count > 0
         if ((Time.now - message.created_at) / 86400).to_i > 7
           thread_table = ThreadTable.create(stale: true, archived: true)
