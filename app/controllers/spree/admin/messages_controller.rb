@@ -18,7 +18,7 @@ class Spree::Admin::MessagesController <  Spree::Admin::BaseController
 				if user_hash.fourth == "Spree::User"
 					name_2 = Spree::User.find_by_id(user_hash.third).email
 				elsif user_hash.fourth == "Contact"
-					name_2 = Spree.user.find_by_id(user_hash.third).full_name
+					name_2 = Contact.find_by_id(user_hash.third).full_name
 				end
 				@users_array << {
 					sender_id: user_hash.first,
@@ -73,7 +73,7 @@ class Spree::Admin::MessagesController <  Spree::Admin::BaseController
 				if user_hash.fourth == "Spree::User"
 					name_2 = Spree::User.find_by_id(user_hash.third).email
 				elsif user_hash.fourth == "Contact"
-					name_2 = Spree.user.find_by_id(user_hash.third).full_name
+					name_2 = Contact.find_by_id(user_hash.third).full_name
 				end
 				@users_array << {
 					sender_id: user_hash.first,
@@ -172,50 +172,23 @@ class Spree::Admin::MessagesController <  Spree::Admin::BaseController
 	def admin_conversations
 		@admin_user = Spree::User.admin.first
 		@users_array = []
-		users_array = (@admin_user.sent_messages + @admin_user.received_messages).pluck(:sender_id, :sender_type, :receiver_id, :receiver_type).uniq
-		users_array.each do |user_hash|
-			unless @users_array.find { |x| x[:receiver_id] == user_hash.first && x[:receiver_type] == user_hash.second }.present? && @users_array.find { |x| x[:sender_id] == user_hash.third && x[:sender_type] == user_hash.fourth }.present?
-				if user_hash.second == "Spree::User"
-					name_1 = Spree::User.find_by_id(user_hash.first).email
-				elsif user_hash.second == "Contact"
-					name_1 = Spree.user.find_by_id(user_hash.first).full_name
-				end
-				if user_hash.fourth == "Spree::User"
-					name_2 = Spree::User.find_by_id(user_hash.third).email
-				elsif user_hash.fourth == "Contact"
-					name_2 = Spree.user.find_by_id(user_hash.third).full_name
-				end
-				@users_array << {
-					sender_id: user_hash.first,
-					sender_type: user_hash.second,
-					receiver_id: user_hash.third,
-					receiver_type: user_hash.fourth,
-					name_1: name_1,
-					name_2: name_2
-				}
-			end
-		end
-		search_user_array =[]
+		users = Spree::User.all
+		contacts = Contact.all
+		@users_array = users + contacts
+		search_user_array = []
 		if params[:search].present?
-			@users_array.each do |user_hash|
-				if user_hash[:name_1].include?(params[:search]) || user_hash[:name_2].include?(params[:search])
-					search_user_array << user_hash
-				end
-			end
-			@users_array = search_user_array
+			users = users.where("email ILIKE :query", query: "%#{params[:search]}%")&.distinct
+			contacts = contacts.where("full_name ILIKE :query", query: "%#{params[:search]}%")&.distinct
+			@users_array = users + contacts
 		end
-		if params[:users].present?
-			users = []
-			params[:users].each do |user|
-				if user[:type] == "User"
-					users << Spree::User.find_by_id(user[:id])
-				elsif user[:type] == "Contact"
-					users << Contact.find_by_id(user[:id])
-				end
+		if params[:user].present?
+			if params[:user][:type] == "User"
+				@user_2 = Spree::User.find_by_id(params[:user][:id])
+			elsif params[:user][:type] == "Contact"
+				@user_2 = Contact.find_by_id(params[:user][:id])
 			end
-			@user_1 = users.first
-			@user_2 = users.second
-			one_to_one_messages = conversation_between_two_parties(users.first, users.second)
+			@user_1 = @admin_user
+			one_to_one_messages = conversation_between_two_parties(@user_1, @user_2)
 			one_to_one_messages = Message.where(id: one_to_one_messages.pluck(:id))
 			thread_ids = one_to_one_messages.pluck(:thread_table_id).uniq
 			@threads = []
