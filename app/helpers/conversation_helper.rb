@@ -1,6 +1,6 @@
 module ConversationHelper
   def fetch_users(user_hash)
-    user_hash = [user_hash[:sender_id],user_hash[:sender_type], user_hash[:receiver_id], user_hash[:receiver_type]]    
+    user_hash = [user_hash[:sender_id],user_hash[:sender_type], user_hash[:receiver_id], user_hash[:receiver_type]]
     users = []
     if user_hash.second == "Spree::User"
       user_1 = Spree::User.find_by_id(user_hash.first)
@@ -66,5 +66,24 @@ module ConversationHelper
     end
     puts "********************#{users.inspect}"
     return users
+  end
+
+  def fetch_user(user)
+    if user.class.to_s == "Spree::User"
+      user = Spree::User.find_by_id(user)
+      user = {
+        type: 'User',
+        id: user&.id,
+        name:  user&.email
+      }
+    elsif user.class.to_s == "Contact"
+      user_1 = Contact.find_by_id(user.id)
+      user = {
+        type: 'Contact',
+        id: user&.id,
+        name:  user&.full_name
+      }
+    end
+    return user
   end
 end
