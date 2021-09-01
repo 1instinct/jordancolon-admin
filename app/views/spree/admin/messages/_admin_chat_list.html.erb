@@ -1,19 +1,13 @@
-<% @users_array.each do |user_hash| %>
-  <% users = fetch_users(user_hash) %>
-  <%= link_to spree.admin_conversations_admin_messages_path(users: users), class: "list-group-item list-group-item-action border-0" do %>
-    <% users.each do |user| %>
-      <% unless user[:type] == 'User' && user[:id] == admin_user.id %>
-        <span>          
-          <div class="d-flex align-items-start">
-            <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
-            <div class="flex-grow-1 ml-3">
-              <%= user[:name] %>
-              <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
-            </div>
-          </div>
-        </span>
-      <% end %>
-    <% end %>
+<% @users_array.each do |user| %>
+  <% user = fetch_user(user) %>
+  <%= link_to spree.admin_conversations_admin_messages_path(user: user), class: "list-group-item list-group-item-action border-0" do %>
+  <div class="d-flex align-items-start">
+    <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
+    <div class="flex-grow-1 ml-3">
+      <%= user[:name] %>
+      <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
+    </div>
+  </div>
   <% end %>
 <% end %>
 <hr class="d-block d-lg-none mt-1 mb-0">
