@@ -472,18 +472,6 @@ ActiveRecord::Schema.define(version: 2021_08_06_153324) do
     t.index ["source_id", "source_type"], name: "index_spree_log_entries_on_source_id_and_source_type"
   end
 
-  create_table "spree_menu_items", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "url"
-    t.string "item_class"
-    t.string "item_id"
-    t.string "item_target"
-    t.integer "parent_id"
-    t.integer "position", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "spree_loyalty_points_transactions", force: :cascade do |t|
     t.integer "loyalty_points"
     t.string "type"
@@ -498,6 +486,18 @@ ActiveRecord::Schema.define(version: 2021_08_06_153324) do
     t.index ["source_type", "source_id"], name: "by_source"
     t.index ["type"], name: "index_spree_loyalty_points_transactions_on_type"
     t.index ["user_id"], name: "index_spree_loyalty_points_transactions_on_user_id"
+  end
+
+  create_table "spree_menu_items", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "url"
+    t.string "item_class"
+    t.string "item_id"
+    t.string "item_target"
+    t.integer "parent_id"
+    t.integer "position", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "spree_oauth_access_grants", force: :cascade do |t|
