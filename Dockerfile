@@ -18,7 +18,7 @@ COPY Gemfile.lock ./
 
 # Note that dotenv is NOT used in production.  Environment
 # comes from the deployment.
-COPY .env.example .env.development
+COPY .env.local .env.development
 
 # Install the Gems
 RUN gem install bundler:2.2.11 && bundle install
