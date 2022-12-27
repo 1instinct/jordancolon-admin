@@ -4,12 +4,14 @@
 
 This should only have to be done once, or whenever the Gemfile is updated.
 
-```docker-compose build
+```shell
+docker-compose build
 ```
 
 ## Create Containers
 
-```docker-compose up
+```shell
+docker-compose up
 ```
 
 DNA Admin should now be available at localhost:8080,
@@ -19,7 +21,8 @@ but it probably needs to be set up first.
 
 In a new terminal run:
 
-```docker-compose exec web rails db:create db:schema:load db:migrate &&
+```shell
+docker-compose exec web rails db:create db:schema:load db:migrate &&
 docker-compose exec -e ADMIN_EMAIL=spree@example.com -e ADMIN_PASSWORD=spree123 web rails db:seed &&
 docker-compose exec web rails spree_sample:load &&
 docker-compose restart
@@ -34,13 +37,15 @@ password: spree123
 
 This will reset the existing database back to blank.
 
-```docker-compose exec web rails db:reset railties:install:migrations db:migrate db:seed spree_sample:load
+```shell
+docker-compose exec web rails db:reset railties:install:migrations db:migrate db:seed spree_sample:load
 ```
 
 You could also blow away all the DB files.  WARNING! You'll have to start
 the install over again if you do this.
 
-```sudo rm -rf tmp/db
+```shell
+sudo rm -rf tmp/db
 ```
 
 ## Extensions
@@ -70,7 +75,7 @@ page for each project.  This only needs to be done once after spree is installed
 This uses heroku ruby buildpack on the heroku-20 stack.  The `master` branch
 on github is hooked in to the deployment.
 
-Git: https://github.com/POL-Clothing/pol-admin
+Git: <https://github.com/1instinct/dna-admin>
 
 ### Testing Production Settings
 
@@ -82,7 +87,8 @@ to NOT use `.env` files.
 To do this, apply the following patch to `docker-compose.yml` (after filling
 in real values for the keys and bucket name):
 
-```--- docker-compose.yml.orig     2021-06-02 10:50:59.011383071 -0400
+```shell
+--- docker-compose.yml.orig     2021-06-02 10:50:59.011383071 -0400
 +++ docker-compose.yml  2021-06-02 10:51:03.267414021 -0400
 @@ -16,4 +16,10 @@
      depends_on:
@@ -101,7 +107,8 @@ in real values for the keys and bucket name):
 After building and starting the container, you will need to build the assets
 in the local container with:
 
-```docker-compose exec web rails assets:precompile
+```shell
+docker-compose exec web rails assets:precompile
 docker-compose restart
 ```
 
@@ -114,10 +121,11 @@ When there are lots of active changes occuring on this repo, make sure to regula
 1. `git checkout main`
 1. `git pull origin main`
 1. `git checkout <your_branch>`
-1. `git merge main`
+1. `git rebase origin/main`
 1. Fix merge conflicts (if any)
 1. `git add .`
-1. `git commit -m 'merge in latest main'`
+1. `git commit`
+1. `git rebase --continue`
 
 Done!
 …now you will be up-to-date with latest code. Do this before you submit your PR, and you can be sure it will be a clean merge.
