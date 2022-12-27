@@ -4,10 +4,10 @@ class ApidocsController < ActionController::Base
     key :swagger, '2.0'
     info do
       key :version, '1.0.0'
-      key :title, 'POL Ecommerce website'
-      key :description, 'POL App and Website. Types of user in this are User.'
+      key :title, ENV['SITE_TITLE']
+      key :description, ENV['SITE_DESCRIPTION']
       contact do
-        key :name, 'Mayank Gandhi'
+        key :name, ENV['SITE_ADMIN_NAME']
       end
     end
     key :host, 'https://dna-admin-dev.instinct.is/' if Rails.env.development?
