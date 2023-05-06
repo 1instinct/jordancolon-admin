@@ -77,6 +77,19 @@ on github is hooked in to the deployment.
 
 Git: <https://github.com/1instinct/dna-admin>
 
+Steps:
+
+* Create pipelines on Heroku
+* Add Github repos
+* Create apps
+* Add PG add-on
+* `heroku config:set -a app-name`
+* `heroku stack:set heroku-20 -a app-name`
+* `heroku run rails db:seed -a app-name`
+* `heroku run rails db:schema:load db:migrate -a app-name`
+* `heroku run rails spree_auth:admin:create -a app-name`
+* `heroku run rails spree_sample:load -a app-name`
+
 ### Testing Production Settings
 
 To test the production settings locally (used to test things like the S3 buckets
